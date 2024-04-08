@@ -1,0 +1,81 @@
+Function 영업일채우기(str해당연도 As String) As String
+
+Application.ScreenUpdating = False
+Application.DisplayAlerts = False
+
+
+Dim wb As Workbook
+Dim ws영업일리스트 As Worksheet, ws휴일참조 As Worksheet
+
+Set wb = ThisWorkbook
+Set ws영업일리스트 = wb.Sheets("영업일리스트")
+Set ws휴일참조 = wb.Sheets("휴일참조")
+
+Dim d As Date
+Dim i As Long
+
+i = 2
+
+
+For d = DateSerial(str해당연도, 1, 1) To DateSerial(str해당연도, 12, 31)
+
+    ws영업일리스트.Range("a" & i) = Format(d, "yyyyMMdd")
+    
+    If Weekday(d) = 1 Then
+        ws영업일리스트.Range("b" & i) = 0
+        ws영업일리스트.Range("c" & i) = "일요일"
+    ElseIf Weekday(d) = 7 Then
+        ws영업일리스트.Range("b" & i) = 0
+        ws영업일리스트.Range("c" & i) = "토요일"
+    Else
+        ws영업일리스트.Range("b" & i) = 1
+    End If
+
+    i = i + 1
+
+Next
+
+Dim rng찾음 As Range
+
+'휴일 업데이트
+For i = 2 To ws휴일참조.UsedRange.Rows.Count
+
+    Set rng찾음 = ws영업일리스트.Columns(1).Find(what:=ws휴일참조.Range("a" & i).Value, lookat:=xlWhole)
+    
+    '영업일여부
+    If rng찾음.Offset(, 1) <> 0 Then
+        rng찾음.Offset(, 1) = ws휴일참조.Range("b" & i)
+    End If
+    '비고
+    If rng찾음.Offset(, 2) = "" Then
+        rng찾음.Offset(, 2) = ws휴일참조.Range("c" & i)
+    Else
+        rng찾음.Offset(, 2) = rng찾음.Offset(, 2) & "," & ws휴일참조.Range("c" & i)
+    End If
+Next
+
+
+
+ws영업일리스트.Activate
+
+Application.ScreenUpdating = True
+Application.DisplayAlerts = True
+
+
+End Function
+
+
+Sub test()
+
+
+Dim str해당연도 As String
+
+str해당연도 = "2022"
+
+
+
+Debug.Print 영업일채우기(2022)
+
+
+
+End Sub
