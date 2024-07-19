@@ -1,0 +1,31 @@
+{
+  "Workflows": [
+    {
+      "Path": null,
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Main.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "dr휴일리스트&Flowchart_1",
+        "outResult&Flowchart_1",
+        "strServiceKey&Flowchart_1",
+        "strAPI_URL&Flowchart_1",
+        "StatusCode&Flowchart_1",
+        "dt휴일리스트&Flowchart_1",
+        "Result&Flowchart_1",
+        "str영업일리스트파일&Flowchart_1",
+        "date작업일&Flowchart_1",
+        "str영업일리스트양식&Flowchart_1"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    }
+  ]
+}
